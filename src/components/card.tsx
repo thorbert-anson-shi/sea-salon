@@ -1,22 +1,42 @@
 import Image from "next/image";
-export default function Card({
-  width,
-  height,
-  title,
-  src,
-}: {
-  width: number;
-  height: number;
+import { Lato } from "next/font/google";
+
+import { motion } from "framer-motion";
+
+const lato_bold = Lato({ subsets: ["latin"], weight: "700" });
+const lato_reg = Lato({ subsets: ["latin"], weight: "400" });
+
+type CardProps = {
+  width: string;
+  height: string;
   title: string;
   src: string;
-}) {
+};
+
+const Card = ({ width, height, title, src }: CardProps) => {
   return (
-    <div
-      className={`flex flex-col items-center justify-center rounded-lg border border-white bg-white`}
-      style={{ width: `${width}%`, height: `${height}%` }}
+    <motion.div
+      className={`flex flex-col items-center justify-around overflow-clip rounded-[2.5rem] border border-black bg-white antialiased`}
+      style={{ width: width, height: height }}
+      whileHover={{ scale: 1.05, translateY: 10 }}
     >
-      <Image src={src} width={width} height={height} alt="image on card" />
-      <h1>{title}</h1>
-    </div>
+      <div id="image-container" className="relative h-1/2 w-full">
+        <Image
+          src={src}
+          fill={true}
+          alt="image on card"
+          style={{ filter: "grayscale(70%)" }}
+          quality={60}
+          className="object-cover"
+        />
+      </div>
+      <h1
+        className={`${lato_bold.className} h-1/2 w-full text-wrap p-3 text-3xl md:p-5`}
+      >
+        {title}
+      </h1>
+    </motion.div>
   );
-}
+};
+
+export default Card;
