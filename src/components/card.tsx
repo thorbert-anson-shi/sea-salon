@@ -10,31 +10,36 @@ type CardProps = {
   width: string;
   height: string;
   title: string;
+  content?: string;
   src: string;
 };
 
-const Card = ({ width, height, title, src }: CardProps) => {
+const Card = ({ width, height, title, content, src }: CardProps) => {
   return (
     <motion.div
-      className={`flex flex-col items-center justify-around overflow-clip rounded-[2.5rem] border border-black bg-white antialiased`}
+      className={`flex flex-col items-center justify-start overflow-clip rounded-[2.5rem] bg-neutral-200 antialiased`}
       style={{ width: width, height: height }}
-      whileHover={{ scale: 1.05, translateY: 10 }}
+      whileHover={{ scale: 1.05 }}
     >
       <div id="image-container" className="relative h-1/2 w-full">
         <Image
           src={src}
           fill={true}
           alt="image on card"
-          style={{ filter: "grayscale(70%)" }}
+          // style={{ filter: "grayscale(70%)" }}
           quality={60}
           className="object-cover"
         />
       </div>
-      <h1
-        className={`${lato_bold.className} h-1/2 w-full text-wrap p-3 text-3xl md:p-5`}
+      <div
+        id="text-container"
+        className="flex flex-col justify-start p-5 antialiased md:p-7"
       >
-        {title}
-      </h1>
+        <h1 className={`${lato_bold.className} w-full text-wrap text-3xl`}>
+          {title}
+        </h1>
+        <p className={`${lato_reg.className} text-wrap text-2xl`}>{content}</p>
+      </div>
     </motion.div>
   );
 };
