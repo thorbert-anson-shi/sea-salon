@@ -1,91 +1,129 @@
 "use client";
 
-import Image from "next/image";
 import { Lato } from "next/font/google";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Card from "../components/card";
-import { useEffect, useRef } from "react";
 
 const lato_bold = Lato({ subsets: ["latin"], weight: "700" });
 const lato_reg = Lato({ subsets: ["latin"], weight: "400" });
 
 export default function Home() {
-  const containerRef = useRef(null);
-
-  // the ref is used to be able to define the scroll container
-  const { scrollYProgress } = useScroll({ container: containerRef });
-  const scaleDown = useTransform(scrollYProgress, [0, 0.5], [1, 0.7]);
-  const scaleUp = useTransform(scrollYProgress, [0, 0.5], [0.7, 1]);
-  const y = useTransform(scrollYProgress, [0, 1], [0, -300]);
-
-  const sections = [
-    { title: "Haircuts and Styling", src: "/scissors.jpg" },
-    { title: "Manicure and Pedicure", src: "/manicure.jpg" },
-    { title: "Facial Treatments", src: "/facial.jpg" },
+  const services: Service[] = [
+    {
+      title: "Haircuts and Styling",
+      src: "/scissors.jpg",
+      content:
+        "Express yourself with our hairdressers with 10+ years of experience",
+    },
+    {
+      title: "Manicure and Pedicure",
+      src: "/manicure.jpg",
+      content: "Keep your hands and feet looking clean and healthy",
+    },
+    {
+      title: "Facial Treatments",
+      src: "/facial.jpg",
+      content: "Rejuvenate your skin with our wide array of facial treatments",
+    },
   ];
 
-  useEffect(() => {
-    console.log(scrollYProgress.get());
-  }, []);
+  const contacts: Person[] = [
+    {
+      name: "Thomas",
+      phoneNo: "0812 3456 789",
+    },
+    {
+      name: "Sekar",
+      phoneNo: "0816 4829 372",
+    },
+  ];
 
   return (
-    // h-screen is needed here to allow the snap points to work correctly
-    <div className="h-screen w-screen overflow-y-scroll" ref={containerRef}>
-      {/* Section for hero elements */}
-      <motion.section
-        id="hero"
-        className="flex h-screen flex-col items-center justify-center space-y-2 py-12 md:space-y-10"
-      >
-        <Image
-          src="sea.svg"
-          alt="SEA Salon"
-          width={400}
-          height={250}
-          className="w-1/2 md:w-1/4"
-        />
-        <h1
-          className={`${lato_bold.className} text-4xl text-white antialiased md:text-7xl`}
+    <div className="h-screen overflow-y-hidden">
+      {/* Static elements */}
+      <div id="static" className="grid grid-flow-row grid-cols-3">
+        <motion.div
+          id="cover-container"
+          className="relative col-span-2 col-end-2 h-screen overflow-visible bg-neutral-900"
+          animate={{ x: -200, opacity: 1 }}
+          initial={{ x: -800, opacity: 0 }}
+          transition={{ type: "spring", stiffness: 50 }}
         >
-          SEA Salon
-        </h1>
-        <h2
-          className={`${lato_reg.className} text-3xl text-white antialiased md:text-5xl`}
-        >
-          Beauty and Elegance Redefined
-        </h2>
-      </motion.section>
+          <div
+            id="text-container"
+            className={`relative z-30 col-start-1 ml-60 h-screen pr-3 text-neutral-300 md:pr-5 md:pt-36`}
+          >
+            <h1 className={`text-8xl ${lato_bold.className} mb-5`}>
+              SEA Salon
+            </h1>
+            <h2 className={`text-6xl ${lato_reg.className}`}>
+              Beauty and Elegance Redefined
+            </h2>
+          </div>
+        </motion.div>
 
-      {/* Section for services */}
-      <motion.section
-        id="services"
-        className="mx-auto h-screen w-3/5 pt-[4.5rem]"
-        style={{ scale: scaleUp, y: y }}
+        {/* Carousel */}
+        <div
+          id="carousel-container"
+          className="col-span-1 col-start-3 flex flex-row"
+        >
+          <h1
+            className={`${lato_reg.className} w-10 text-wrap pt-10 text-center text-5xl text-white md:pt-48`}
+          >
+            O u r &nbsp;&nbsp; S e r v i c e s
+          </h1>
+          <motion.ul
+            id="carousel"
+            className="pyf-10 flex h-full snap-y snap-proximity flex-col flex-nowrap overflow-y-scroll md:mt-10 md:px-10 md:py-16"
+            animate={{ x: 0, opacity: 1 }}
+            initial={{ x: 800, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 50 }}
+          >
+            {services.map((service, index) => (
+              <li
+                // Flex shrink 0 is needed here to prevent the flex items from shrinking based on the container size
+                className="z-20 flex h-4/5 flex-shrink-0 snap-center flex-col items-center justify-center"
+                key={index}
+              >
+                <button />
+                <Card
+                  width="80%"
+                  height="90%"
+                  title={service.title}
+                  src={service.src}
+                  content={service.content}
+                />
+              </li>
+            ))}
+          </motion.ul>
+        </div>
+      </div>
+
+      {/* Contacts panel */}
+      <motion.div
+        id="contact"
+        className={`${lato_reg.className} h-[30vh] w-[35vw] rounded-tr-3xl bg-neutral-200 p-3 md:p-5`}
+        animate={{ y: -80, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 50 }}
+        whileHover={{ y: -150 }}
       >
-        <h1
-          className={`${lato_bold.className} my-3 text-center text-3xl text-white md:my-5 md:text-5xl`}
-        >
-          Our Services
-        </h1>
-        <ul
-          id="carousel"
-          className="flex h-4/5 snap-x snap-mandatory flex-row flex-nowrap overflow-x-scroll"
-        >
-          {sections.map((section, index) => (
+        <h1 className={`${lato_bold.className} text-4xl`}>Contact Us</h1>
+        <ul className={`${lato_reg.className} mt-5 flex flex-row flex-nowrap`}>
+          {contacts.map((contact, index) => (
             <li
-              // Flex shrink 0 is needed here to prevent the flex items from shrinking based on the container size
-              className="flex w-1/3 flex-shrink-0 snap-center flex-col items-center"
+              className="pr-5 text-2xl text-neutral-700"
+              style={
+                index !== 0
+                  ? { borderLeft: "2px solid black", paddingLeft: "1.25rem" }
+                  : {}
+              }
               key={index}
             >
-              <Card
-                width="80%"
-                height="60%"
-                title={section.title}
-                src={section.src}
-              />
+              {contact.phoneNo} ({contact.name})
             </li>
           ))}
         </ul>
-      </motion.section>
+      </motion.div>
     </div>
   );
 }
