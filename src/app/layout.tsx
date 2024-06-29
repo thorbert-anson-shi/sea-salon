@@ -37,7 +37,7 @@ export default function RootLayout({
             <Link href="" className="hover:underline">
               Booking
             </Link>
-            <Link href="" className="hover:underline">
+            <Link href="/feedback" className="hover:underline">
               Reviews
             </Link>
           </div>
