@@ -2,41 +2,64 @@
 
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
-import { motion, useAnimate } from "framer-motion";
-import { BottomModal } from "../../components/bottom-modal";
+import { motion } from "framer-motion";
+import { Lato } from "next/font/google";
+import Link from "next/link";
+
+const lato_bold = Lato({ subsets: ["latin"], weight: "700" });
+const lato_reg = Lato({ subsets: ["latin"], weight: "400" });
 
 const FeedbackPage = () => {
+  const [reviews, setReviews] = useState<Review[]>([]);
+
   const [name, setName] = useState("");
   const [stars, setStars] = useState(0);
   const [review, setReview] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
     console.log("Name:", name);
     console.log("Stars:", stars);
     console.log("Review:", review);
-    // Reset form fields
-    setName("");
-    setStars(0);
-    setReview("");
+    // Handle form submission here
+    if (name === "" || stars === 0 || review === "") {
+      setModalText("Please fill out all fields before submitting.");
+    } else {
+      setModalText("Thanks for leaving us a review!");
+      setReviews([...reviews, { name, stars, review }]);
+      // Reset form fields
+      setName("");
+      setStars(0);
+      setReview("");
+    }
+
+    setIsOpen(true);
+    console.log(isOpen);
   };
 
+  // Modal settings
   const variants = {
-    visible: { opacity: 1, y: 0 },
+    visible: { opacity: 1, y: "-100%" },
     hidden: { opacity: 0, y: "100%" },
   };
-
   const [isOpen, setIsOpen] = useState(false);
 
+  const [modalText, setModalText] = useState("Thanks for leaving us a review!");
+
   return (
-    <div id="global-container" className="h-screen w-screen">
-      <div className="flex h-full w-full flex-col items-center justify-center">
+    <div id="global-container" className="h-screen w-screen overflow-hidden">
+      <motion.div
+        id="form-container"
+        className="flex h-full w-full flex-col items-center justify-center"
+        animate={{ opacity: 1 }}
+        initial={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
+      >
         <form
           onSubmit={handleSubmit}
-          className="flex w-fit flex-col justify-center space-y-2 rounded-md bg-white p-5 shadow-md"
+          className={`${lato_bold.className} flex w-[20vw] flex-col justify-center space-y-5 rounded-md bg-white p-5 text-xl shadow-md`}
         >
-          <h1 className="self-center">Feedback Form</h1>
+          <h1 className="self-center text-3xl">Feedback Form</h1>
           <div>
             <label htmlFor="name">Name: </label>
             <input
@@ -44,10 +67,11 @@ const FeedbackPage = () => {
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full rounded-md border-2 border-gray-300 p-1"
+              className={`${lato_reg.className} w-full rounded-md border-2 border-gray-300 p-1`}
             />
           </div>
           <div>
+            <label htmlFor="stars">How would you rate our service?</label>
             <div id="stars" className="flex flex-row">
               {[1, 2, 3, 4, 5].map((star) => (
                 <FaStar
@@ -64,36 +88,37 @@ const FeedbackPage = () => {
                 />
               ))}
             </div>
-            <input type="radio" hidden={true} />
+            <input name="stars" type="radio" hidden={true} />
           </div>
           <div>
-            <label htmlFor="review">Review: </label>
+            <label htmlFor="review">Leave your thoughts here: </label>
             <textarea
               id="review"
               value={review}
               onChange={(e) => setReview(e.target.value)}
-              className="w-full rounded-md border-2 border-gray-300 p-1"
+              className={`${lato_reg.className} w-full rounded-md border-2 border-gray-300 p-1`}
             />
           </div>
           <button
             type="submit"
-            className="w-fit self-end rounded-md bg-neutral-300 px-3 py-2 hover:bg-neutral-400"
+            className={`${lato_reg.className} w-fit self-end rounded-md bg-neutral-300 px-3 py-2 hover:bg-neutral-400`}
           >
             Submit
           </button>
         </form>
-      </div>
+      </motion.div>
       <motion.div
         id="alert-modal"
-        className="flex h-[10vh] w-[50vw] flex-row items-center justify-between rounded-t-3xl bg-neutral-300 p-5 text-xl md:p-10"
+        className={`${lato_reg.className} flex h-[10vh] w-[50vw] flex-row items-center justify-between rounded-t-3xl bg-neutral-300 p-3 text-xl md:p-5`}
         animate={isOpen ? variants.visible : variants.hidden}
+        transition={{ type: "tween", duration: 0.3 }}
       >
-        <p>Thanks for leaving us a review!</p>
+        <p>{modalText}</p>
         <button
-          className="p-3 duration-300 hover:bg-neutral-400"
+          className="aspect-square h-full rounded-full duration-300 hover:bg-neutral-400"
           onClick={() => setIsOpen(false)}
         >
-          x
+          X
         </button>
       </motion.div>
     </div>

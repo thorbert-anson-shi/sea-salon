@@ -19,7 +19,7 @@ export default function RootLayout({
         >
           <div
             id="container"
-            className="flex w-full flex-row items-center justify-center space-x-5 p-5"
+            className="flex w-full flex-row items-center justify-center space-x-7 p-5 md:space-x-10"
           >
             <div id="logo" className="flex grow flex-row self-start">
               <Link href="/">
@@ -28,11 +28,8 @@ export default function RootLayout({
             </div>
 
             {/* Links to other pages */}
-            <Link href="" className="hover:underline">
-              About Us
-            </Link>
-            <Link href="" className="hover:underline">
-              Contact
+            <Link href="/" className="hover:underline">
+              Home
             </Link>
             <Link href="" className="hover:underline">
               Booking

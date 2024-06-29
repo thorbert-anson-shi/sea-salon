@@ -47,7 +47,7 @@ export default function Home() {
           className="relative col-span-2 col-end-2 h-screen overflow-visible bg-neutral-900"
           animate={{ x: -200, opacity: 1 }}
           initial={{ x: -800, opacity: 0 }}
-          transition={{ type: "spring", stiffness: 50 }}
+          transition={{ type: "spring", stiffness: 25 }}
         >
           <div
             id="text-container"
@@ -63,21 +63,21 @@ export default function Home() {
         </motion.div>
 
         {/* Carousel */}
-        <div
+        <motion.div
           id="carousel-container"
           className="col-span-1 col-start-3 flex flex-row"
+          animate={{ x: 0, opacity: 1 }}
+          initial={{ x: 800, opacity: 0 }}
+          transition={{ type: "spring", stiffness: 25 }}
         >
           <h1
             className={`${lato_reg.className} w-10 text-wrap pt-10 text-center text-5xl text-white md:pt-48`}
           >
             O u r &nbsp;&nbsp; S e r v i c e s
           </h1>
-          <motion.ul
+          <ul
             id="carousel"
             className="pyf-10 flex h-full snap-y snap-proximity flex-col flex-nowrap overflow-y-scroll md:mt-10 md:px-10 md:py-16"
-            animate={{ x: 0, opacity: 1 }}
-            initial={{ x: 800, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 50 }}
           >
             {services.map((service, index) => (
               <li
@@ -95,8 +95,8 @@ export default function Home() {
                 />
               </li>
             ))}
-          </motion.ul>
-        </div>
+          </ul>
+        </motion.div>
       </div>
 
       {/* Contacts panel */}
@@ -104,7 +104,7 @@ export default function Home() {
         id="contact"
         className={`${lato_reg.className} h-[30vh] w-[35vw] rounded-tr-3xl bg-neutral-200 p-3 md:p-5`}
         animate={{ y: -80, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 50 }}
+        transition={{ type: "spring", stiffness: 25 }}
         whileHover={{ y: -150 }}
       >
         <h1 className={`${lato_bold.className} text-4xl`}>Contact Us</h1>

@@ -19,7 +19,7 @@ const Card = ({ width, height, title, content, src }: CardProps) => {
     <motion.div
       className={`flex flex-col items-center justify-start overflow-clip rounded-[2.5rem] bg-neutral-200 antialiased`}
       style={{ width: width, height: height }}
-      whileHover={{ scale: 1.05 }}
+      whileHover={{ scale: 1.1 }}
       transition={{ type: "tween", duration: 0.2 }}
     >
       <div id="image-container" className="relative h-1/2 w-full">

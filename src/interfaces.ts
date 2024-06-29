@@ -8,3 +8,9 @@ interface Service {
     src: string;
     content: string;
 }
+
+interface Review {
+    name: string;
+    stars: number;
+    review: string;
+}
