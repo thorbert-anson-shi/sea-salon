@@ -4,13 +4,13 @@ import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { Lato } from "next/font/google";
-import Link from "next/link";
+import { createReview } from "@/api_routes";
 
 const lato_bold = Lato({ subsets: ["latin"], weight: "700" });
 const lato_reg = Lato({ subsets: ["latin"], weight: "400" });
 
 const FeedbackPage = () => {
-  const [reviews, setReviews] = useState<Review[]>([]);
+  // const [reviews, setReviews] = useState<Review[]>([]);
 
   const [name, setName] = useState("");
   const [stars, setStars] = useState(0);
@@ -26,7 +26,10 @@ const FeedbackPage = () => {
       setModalText("Please fill out all fields before submitting.");
     } else {
       setModalText("Thanks for leaving us a review!");
-      setReviews([...reviews, { name, stars, review }]);
+      // setReviews([...reviews, { name, stars, review }]);
+
+      createReview(name, stars, review);
+
       // Reset form fields
       setName("");
       setStars(0);
