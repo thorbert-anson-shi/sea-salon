@@ -30,6 +30,7 @@ const Card = ({ width, height, title, content, src }: CardProps) => {
           // style={{ filter: "grayscale(70%)" }}
           quality={60}
           className="object-cover"
+          priority={true}
         />
       </div>
       <div

@@ -3,7 +3,7 @@
 import { PrismaClient } from "@prisma/client";
 
 // Ensure PrismaClient is reused between lambda functions to avoid exhausting database connections
-let prisma: PrismaClient;
+let prisma = new PrismaClient();
 
 export const createReview = async (name: string, stars: number, content: string) => {
     try {
@@ -18,8 +18,8 @@ export const createReview = async (name: string, stars: number, content: string)
         console.log(response);
         return response;
     } catch (error) {
-        console.error("Failed to create review:", error);
-        throw new Error("Failed to create review");
+        console.error(error);
+        return error;
     }
 };
 

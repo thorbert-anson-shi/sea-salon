@@ -18,9 +18,9 @@ const FeedbackPage = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Name:", name);
-    console.log("Stars:", stars);
-    console.log("Review:", review);
+    // console.log("Name:", name);
+    // console.log("Stars:", stars);
+    // console.log("Review:", review);
     // Handle form submission here
     if (name === "" || stars === 0 || review === "") {
       setModalText("Please fill out all fields before submitting.");
