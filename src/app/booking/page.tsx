@@ -161,3 +161,5 @@ export const BookingPage = () => {
     </motion.div>
   );
 };
+
+export default BookingPage;
