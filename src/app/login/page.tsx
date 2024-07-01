@@ -8,7 +8,7 @@ import { createSHA256Hash, createUser } from "./data";
 const lato_bold = Lato({ subsets: ["latin"], weight: "700" });
 const lato_reg = Lato({ subsets: ["latin"], weight: "400" });
 
-export const LoginPage = () => {
+const LoginPage = () => {
   // TODO: Hash password on client to pass to server
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

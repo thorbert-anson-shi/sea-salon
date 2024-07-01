@@ -9,7 +9,7 @@ import { createReview } from "@/app/feedback/data";
 const lato_bold = Lato({ subsets: ["latin"], weight: "700" });
 const lato_reg = Lato({ subsets: ["latin"], weight: "400" });
 
-export const FeedbackPage = () => {
+const FeedbackPage = () => {
   const [name, setName] = useState("");
   const [stars, setStars] = useState(0);
   const [review, setReview] = useState("");
