@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { getAvailableSessions, makeReservation } from "@/api_routes";
+import { getAvailableSessions, makeReservation } from "@/app/booking/data";
 import { Service } from "@prisma/client";
 import { motion } from "framer-motion";
 
 import { Lato } from "next/font/google";
 
 const lato_reg = Lato({ subsets: ["latin"], weight: "400" });
+const lato_bold = Lato({ subsets: ["latin"], weight: "700" });
 
 export default function BookingPage() {
   const handleSubmit = (e: React.FormEvent) => {
@@ -56,7 +57,7 @@ export default function BookingPage() {
     >
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col space-y-5 rounded-3xl bg-white p-10 md:text-lg"
+        className={`${lato_reg.className} lex flex-col space-y-5 bg-white p-10 text-lg shadow-md`}
         onLoad={() => {
           const currentTime = new Date();
 
@@ -69,7 +70,9 @@ export default function BookingPage() {
           handleAvailabilityChange(currentTime, service);
         }}
       >
-        <h1 className="text-3xl">Book an Appointment</h1>
+        <h1 className={`${lato_bold.className} text-3xl`}>
+          Book an Appointment
+        </h1>
 
         <div className="flex flex-col">
           <label htmlFor="name">Name:</label>
@@ -78,7 +81,7 @@ export default function BookingPage() {
             id="name"
             name="name"
             value={name}
-            className="rounded-md border-2 border-gray-300 p-1"
+            className="rounded-md border-2 border-gray-300 px-1"
             onChange={(e) => setName(e.target.value)}
           />
         </div>
@@ -90,7 +93,7 @@ export default function BookingPage() {
             id="phoneNo"
             name="phoneNo"
             value={phoneNo}
-            className="rounded-md border-2 border-gray-300 p-1"
+            className="rounded-md border-2 border-gray-300 px-1"
             onChange={(e) => setPhoneNo(e.target.value)}
             pattern="[0-9]{7,15}"
           />
@@ -121,7 +124,7 @@ export default function BookingPage() {
             type="date"
             id="date"
             name="date"
-            className="rounded-md border-2 border-gray-300 p-1"
+            className="rounded-md border-2 border-gray-300"
             onChange={(e) => {
               const selectedDate = new Date(e.target.value);
               setDate(selectedDate);
@@ -149,7 +152,7 @@ export default function BookingPage() {
         <div className="flex flex-col items-center">
           <button
             type="submit"
-            className="w-4/5 rounded-md border-2 border-gray-300 bg-neutral-200 p-1 hover:bg-neutral-300"
+            className="mt-5 self-end rounded-md bg-neutral-300 px-3 py-2 text-black hover:bg-neutral-400"
           >
             Submit
           </button>

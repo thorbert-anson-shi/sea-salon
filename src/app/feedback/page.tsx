@@ -4,14 +4,12 @@ import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { Lato } from "next/font/google";
-import { createReview } from "@/api_routes";
+import { createReview } from "@/app/feedback/data";
 
 const lato_bold = Lato({ subsets: ["latin"], weight: "700" });
 const lato_reg = Lato({ subsets: ["latin"], weight: "400" });
 
 const FeedbackPage = () => {
-  // const [reviews, setReviews] = useState<Review[]>([]);
-
   const [name, setName] = useState("");
   const [stars, setStars] = useState(0);
   const [review, setReview] = useState("");
@@ -56,20 +54,22 @@ const FeedbackPage = () => {
       >
         <form
           onSubmit={handleSubmit}
-          className={`${lato_bold.className} flex w-[20vw] flex-col justify-center space-y-5 rounded-md bg-white p-5 text-xl shadow-md`}
+          className={`${lato_reg.className} flex w-fit flex-col space-y-5 bg-white p-10 text-lg shadow-md`}
         >
-          <h1 className="self-center text-3xl">Feedback Form</h1>
-          <div>
+          <h1 className={`${lato_bold.className} self-center text-3xl`}>
+            Feedback Form
+          </h1>
+          <div className="flex flex-col">
             <label htmlFor="name">Name: </label>
             <input
               type="text"
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className={`${lato_reg.className} w-full rounded-md border-2 border-gray-300 p-1`}
+              className={`${lato_reg.className} w-full rounded-md border-2 border-gray-300 px-1`}
             />
           </div>
-          <div>
+          <div className="flex flex-col">
             <label htmlFor="stars">How would you rate our service?</label>
             <div id="stars" className="flex flex-row">
               {[1, 2, 3, 4, 5].map((star) => (
@@ -89,21 +89,23 @@ const FeedbackPage = () => {
             </div>
             <input name="stars" type="radio" hidden={true} />
           </div>
-          <div>
+          <div className="flex flex-col">
             <label htmlFor="review">Leave your thoughts here: </label>
             <textarea
               id="review"
               value={review}
               onChange={(e) => setReview(e.target.value)}
-              className={`${lato_reg.className} w-full rounded-md border-2 border-gray-300 p-1`}
+              className={`${lato_reg.className} w-full rounded-md border-2 border-gray-300 px-1`}
             />
           </div>
-          <button
-            type="submit"
-            className={`${lato_reg.className} w-fit self-end rounded-md bg-neutral-300 px-3 py-2 hover:bg-neutral-400`}
-          >
-            Submit
-          </button>
+          <div className="flex flex-col">
+            <button
+              type="submit"
+              className={`mt-5 self-end rounded-md bg-neutral-300 px-3 py-2 hover:bg-neutral-400`}
+            >
+              Submit
+            </button>
+          </div>
         </form>
       </motion.div>
       <motion.div

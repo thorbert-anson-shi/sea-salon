@@ -14,19 +14,16 @@ export default function Home() {
       src: "/scissors.jpg",
       content:
         "Express yourself with our hairdressers with 10+ years of experience",
-      // booking_url: "/booking?name=&email=&date=&time=&service=haircut",
     },
     {
       title: "Manicure and Pedicure",
       src: "/manicure.jpg",
       content: "Keep your hands and feet looking clean and healthy",
-      // booking_url: "/booking?name=&email=&date=&time=&service=manicure",
     },
     {
       title: "Facial Treatments",
       src: "/facial.jpg",
       content: "Rejuvenate your skin with our wide array of facial treatments",
-      // booking_url: "/booking?name=&email=&date=&time=&service=facial",
     },
   ];
 
@@ -94,7 +91,6 @@ export default function Home() {
                   title={service.title}
                   src={service.src}
                   content={service.content}
-                  // booking_url={service.booking_url}
                 />
               </li>
             ))}
