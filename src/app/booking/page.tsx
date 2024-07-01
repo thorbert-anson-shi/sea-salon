@@ -10,7 +10,7 @@ import { Lato } from "next/font/google";
 const lato_reg = Lato({ subsets: ["latin"], weight: "400" });
 const lato_bold = Lato({ subsets: ["latin"], weight: "700" });
 
-export default function BookingPage() {
+export const BookingPage = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (name === "" || phoneNo === "" || !date || !session) {
@@ -160,4 +160,4 @@ export default function BookingPage() {
       </form>
     </motion.div>
   );
-}
+};
