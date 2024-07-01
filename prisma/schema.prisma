@@ -8,8 +8,16 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model reviews {
+model user {
+  id       Int    @id @default(autoincrement())
+  fullName String @db.VarChar(128)
+  email    String @unique @db.VarChar(128)
+  phoneNo  String @db.VarChar(15)
+  password String @db.VarChar(128)
+  role     Role   @default(CUSTOMER)
+}
+
+model review {
   id         Int     @id @default(autoincrement())
   name       String  @db.VarChar(128)
   starrating Int     @db.SmallInt
@@ -19,7 +27,20 @@ model reviews {
 model reservation {
   id      Int      @id @default(autoincrement())
   name    String   @db.VarChar(128)
-  service String
   phoneNo String   @db.VarChar(15)
-  time    DateTime
+  session Int
+  service Service
+  date    DateTime @db.Date
+  created DateTime @default(now())
+}
+
+enum Service {
+  HS
+  MP
+  FT
+}
+
+enum Role {
+  ADMIN
+  CUSTOMER
 }

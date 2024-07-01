@@ -31,7 +31,7 @@ export default function RootLayout({
             <Link href="/" className="hover:underline">
               Home
             </Link>
-            <Link href="" className="hover:underline">
+            <Link href="/booking" className="hover:underline">
               Booking
             </Link>
             <Link href="/feedback" className="hover:underline">

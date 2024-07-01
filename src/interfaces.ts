@@ -7,6 +7,7 @@ interface Service {
     title: string;
     src: string;
     content: string;
+    // booking_url: string;
 }
 
 interface Review {
