@@ -4,6 +4,8 @@ My submission for COMPFEST-16 Software Engineering Academy
 
 The project is built using Next.js and has been deployed on Vercel with Vercel's PostgreSQL as a database.
 
+I was not able to complete the authentication and authorization part of the challenge properly.
+
 Check out the deployed project on the link down below:  
 https://sea-salon-psi.vercel.app/
 
