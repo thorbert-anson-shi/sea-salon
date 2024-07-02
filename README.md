@@ -7,7 +7,7 @@ The project is built using Next.js and has been deployed on Vercel with Vercel's
 Check out the deployed project on the link down below:  
 https://sea-salon-psi.vercel.app/
 
-For completeness' sake, here are the environment variables of the project:  
+As per the technical challenge's requirements, here are the environment variables of the project that would otherwise not be pushed onto the repo:  
 DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=public"
 
 POSTGRES_DATABASE="verceldb"  
